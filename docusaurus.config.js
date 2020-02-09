@@ -6,7 +6,7 @@ module.exports = {
     tagline: 'The tagline of my site',
     url: 'https://docs.projectcaelus.org',
     baseUrl: '/',
-    favicon: 'img/favicon.ico',
+    favicon: 'img/favicon.png',
     organizationName: 'ProjectCaelus', // Usually your GitHub org/user name.
     projectName: 'docs', // Usually your repo name.
     themeConfig: {

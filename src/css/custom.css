@@ -1,7 +1,8 @@
-/* KaTeX */
+/* Imports */
 @import url('https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css');
+@import url('https://fonts.googleapis.com/css?family=Fira+Code|Karla:400,700&display=swap');
 
-/* Color scheme */
+/* Colors and fonts */
 :root {
     --ifm-color-primary: #f72c25;
     --ifm-color-primary-dark: #f6110a;
@@ -10,6 +11,10 @@
     --ifm-color-primary-light: #f84740;
     --ifm-color-primary-lighter: #f9544e;
     --ifm-color-primary-lightest: #fa7c77;
+
+    --ifm-font-family-base: 'Karla', Tahoma, Geneva, Verdana, sans-serif !important;
+    --ifm-font-family-monospace: 'Fira Code', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    --ifm-code-font-size: 100%;
 }
 
 /* Code blocks */
