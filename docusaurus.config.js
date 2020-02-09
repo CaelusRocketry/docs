@@ -1,3 +1,6 @@
+const remarkMath = require('remark-math');
+const rehypeKatex = require('rehype-katex');
+
 module.exports = {
     title: 'Project Caelus',
     tagline: 'The tagline of my site',
@@ -56,7 +59,9 @@ module.exports = {
             {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
-                    editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/'
+                    editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+                    remarkPlugins: [remarkMath],
+                    rehypePlugins: [rehypeKatex]
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css')
