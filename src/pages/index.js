@@ -4,16 +4,21 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
+import styles from './index.module.css';
 
-function Home() {
+const IndexPage = () => {
     const context = useDocusaurusContext();
     const { siteConfig = {} } = context;
     return (
         <Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
-            <main>Welcome to Project Caelus' documentation site!</main>
+            <main className={styles}>
+                <section className={styles.top}>
+                    <img src="../../static/img/logo.svg"></img>
+                    <p>Welcome to Project Caelus' documentation site!</p>
+                </section>
+            </main>
         </Layout>
     );
-}
+};
 
-export default Home;
+export default IndexPage;

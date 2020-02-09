@@ -18,6 +18,7 @@ module.exports = {
             },
             links: [
                 { to: 'docs/index', label: 'Docs', position: 'left' },
+                { to: 'https://projectcaelus.org/blog', label: 'Blog', position: 'left' },
                 {
                     href: 'https://github.com/ProjectCaelus/docs',
                     label: 'GitHub',
