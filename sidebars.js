@@ -7,6 +7,7 @@
 
 module.exports = {
     someSidebar: {
-        Overview: ['index']
+        Overview: ['index'],
+        "Ground Software": ['gs_setup', 'gs_backend', 'gs_frontend', 'gs_common_errors']
     }
 };
