@@ -1,32 +1,57 @@
 ---
 id: gs_backend
-title: Ground Software Backend!
+title: Backend
 sidebar_label: Backend
 ---
 
-This is _pretty_ **awesome**! Here is a [link](https://projectcaelus.org) to our website.
+## Overview
 
-## Math
+The **GS backend**, also called the **server**, is responsible for shuffling message from _Flight Software_ to the frontend display and vice versa.
+The server is hosted as a Python Flask Application.
+It uses **TCP Sockets** to communicate with the _Flight Software_ and **SocketIO** to communicate with the frontend UI.
 
-Lift ($L$) can be determined by Lift Coefficient ($C_L$) by the following equation:
+## Setup
 
-$$
-L = \frac{1}{2} \rho v^2 S C_L
-$$
+First, if you haven't cloned the git repository onto your computer, make sure to do so using the command:
 
-## Code
-
-```python
-def hello():
-    return "world"
+```
+git clone https://github.com/ProjectCaelus/ground-software
 ```
 
-## Lists
+You'll also need [Python 3](https://www.python.org/downloads/) installed on your device.
 
-1. first
-2. second
-3. third
+To install the necessary packages, run:
 
--   first
--   second
--   third
+```
+pip3 install -r requirements.txt
+```
+
+and to begin the backend server, run:
+
+```
+python3 main.py
+```
+
+## Code Documentation
+
+### Flask
+
+**Write something about flask**
+
+### SocketIO
+**SocketIO** manages the two-way communication process between the frontend and backend.
+
+SocketIO forwards messages from Flight Software to the frontend using three methods, based on the header of the incoming message.
+- update_general method
+- update_sensor_data
+- update_valve_data
+
+To inform Flight Software of a button press on the front end, SocketIO receives a dictionary of information from the frontend, packages into a Log, then Packet, and enqueues it into telemetry in the on_button_press method.
+
+**TODO: Explain what a log / packet are (or add a link to the corresponding documentation file on FS)**
+
+## Telemetry
+
+Telemetry manages all communication between Flight Software and the backend using TCP Sockets. It can send and receive messages to and from Flight Software. Once it receives a messages, it classifies each log as one of general, sensor, or valve, and calls the corresponding socketio method to handle the data. Telemetry also continuously asks Flight Software for heartbeat messages to ensure the communication between the two is alive. 
+
+
