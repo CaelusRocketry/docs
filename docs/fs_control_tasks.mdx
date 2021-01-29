@@ -3,3 +3,48 @@ id: fs_control_tasks
 title: Control Tasks
 sidebar_label: Control Tasks
 ---
+
+**Control Tasks** are Flight Software system's middle-management; they set Flags and tell Tasks how to manipulate the rocket's devices.
+
+## [SensorControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/SensorControl.hpp) and [SensorControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/SensorControl.cpp)
+
+At the topmost level for sensors, Sensor Control does all of the decision-making related to the sensors. Sensor Control contains the 
+Kalman Filter (to normalize data) and boundary checking procedures (to see if the data is too extreme and would justify 
+an automatic abort), and process to execute certain actions (such as actuating a valve). Sensor 
+Control also sends sensor data back to the Ground Station.
+
+| ```SensorControl()```| 
+| :----------- | 
+| Initalizes the interval at which sensor data is sent to GS. Logs an initalization confirmation.|
+
+
+| Returns     | Description | 
+| :----------- | :----------- | 
+| ```void```  | ```begin()``` <br /> Creates sensor, boundaries, and Kalman dictionaries based on the config file. Logs a startup confirmation      | 
+| ```void```  | ```execute()```  <br /> Calls ```boudary_check()``` and, if enough time has passed, ```send_sensor_data()```      | 
+| ```void```  | ```boudary_check()``` <br />  Ensures sensor values aren't outside the allowed boundaries. If they are, updates Registry with the appropriate ```SensorStatus```.| 
+| ```void```  | ```send_sensor_data()``` <br />  Adds sensor data to the list of logs in Flag.  | 
+
+
+## [ValveControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/ValveControl.hpp) and [ValveControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/ValveControl.cpp)
+
+
+‌ValveControl is responsible for ensuring that valves are not open for too long and closing them if they have been opened beyond
+a certain amount of time. It also sends valve data back to the Ground Station.
+
+
+| ```ValveControl()```| 
+| :----------- | 
+| Initalizes the interval at which valve data is sent to GS. Logs an initalization confirmation.|
+
+
+| Returns     | Description | 
+| :----------- | :----------- | 
+| ```void```  | ```begin()``` <br /> Logs a startup confirmation      | 
+| ```void```  | ```execute()```  <br /> Calls ```check_abort()``` and, if enough time has passed, ```send_valve_data()```      | 
+| ```void```  | ```send_valve_data()``` <br />  Adds valve data to the list of logs in Flag.  | 
+| ```void```  | ```abort()``` <br />  Opens all valves with abort priority.| 
+| ```void```  | ```undo_abort()``` <br />  Resets all valve to a none ```ActuationType``` with abort priority.| 
+| ```void```  | ```check_abort()``` <br />  If registry indicates an abort, calls ```abort()```. Otherwise, if soft abort has been cancelled, calls ```undo_abort```| 
+
+
