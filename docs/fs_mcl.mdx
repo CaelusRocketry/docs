@@ -3,3 +3,98 @@ id: fs_mcl
 title: Main Control Loop
 sidebar_label: MCL
 ---
+
+The **Main Control Loop (MCL)**, run by the **Supervisor** is the core of our Flight Software, controlling the **Read, Control, Actuate (RCA)** cycle. 
+All data in FS in stored in a dictionary-type object called the **Registry**. Any actions that need to happen are noted in a very similiar object called the **Flag**. 
+
+## [Supervisor.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/mcl/Supervisor.hpp) and [Supervisor.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/mcl/Supervisor.cpp)
+
+In the FS code hierarchy, Supervisor is at the top; it's responsible for starting and running the whole show. 
+
+| ```Supervisor()```| 
+| :----------- | 
+| Deafult constructor. |
+
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```initalize()``` <br />  Reads in data from the specific ```config.json```. Intializes all the Control Tasks and Tasks found in the config file. | 
+| ```void```  | ```read()```  <br /> Calls the ```read()``` method of every Task. | 
+| ```void```  | ```control()``` <br />  Calls the ```control()``` method of every Control Task. | 
+| ```void```  | ```actuate()``` <br />  Calls the ```actuate()``` method of every Control Task.  | 
+| ```void```  | ```run()``` <br />  This is the main loop. In an endless loop, calls the Supervisor ```read()```, ```contol()```, and ```actuate()``` methods.  | 
+
+
+## [Registry.hpp](link) and [Registry.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/mcl/Registry.cpp)
+
+This Registry is a global registry - that means it's avaliable in any file, without imports or intializations. 
+The Registry stores all valve and se
+
+| ```Registry()```| 
+| :----------- | 
+| Declares ```valves```, which given type and location information as strings, returns the associated ```RegistryValveInfo```. Declares ```sensors```, which given type and location information as strings, returns the associated ```RegistrySensorInfo```. Declares the priority queue of incoming telemetry logs. Also declares  some telemtry, stage, and abort variables. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```initalize()``` <br />  Initalizes sensors and valves according to ```config.json```, as well as some default telemetry, stage, and abort variables. | 
+| ```bool```  | ```sensor_exists(string type, string location)```  <br />  Returns true is the specified sensor has been initalized. | 
+| ```bool```  | ```valve_exists(string type, string location)``` <br />   Returns true is the specified valve has been initalized. | 
+
+
+```Registry.hpp``` also defines the following ```structs```:
+
+| Struct     | Description | 
+| :---------- | :----------- | 
+| ```RegistrySensorInfo```  | ```measured_value``` <br />  ```normalized_value``` <br /> ```SensorStatus``` | 
+| ```RegistryValveInfo```  | ```SolenoidState```: default close. <br />  ```ActuationType```: default none. <br /> ```ValvePriority```: default none. | 
+
+
+## [Flag.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/mcl/Flag.hpp) and [Flag.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/mcl/Flag.cpp)
+
+Description. 
+
+| ```Constructor()```| 
+| :----------- | 
+| Declares ```valves```, which given type and location information as strings, returns the associated ```FlagValveInfo```. Defines priority queues for outgoing and incoming logs. Notes the time of initalization. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```enqueue(Log log, LogPriority LogPriority)``` <br />  Add the specified log into a new packet, then enqueues the packet. | 
+| ```void```  | ```read(string header, json message)```  <br />  Creates a log with the given information, then calls ```enqueue()``` with the log and an info-level priority. | 
+| ```void```  | ```log_debug(string header, json message)``` <br />   Creates a log with the given information, then calls ```enqueue()``` with the log and a debug-level priority. | 
+| ```void```  | ```log_warning(string header, json message)``` <br />   Creates a log with the given information, then calls ```enqueue()``` with the log and a warning-level priority.  | 
+| ```void```  | ```log_critical(string header, json message)``` <br />  Creates a log with the given information, then calls ```enqueue()``` with the log and a critical-level priority.  | 
+
+```Flag.hpp``` also defines the following ```struct```:
+
+| Struct     | Description | 
+| :---------- | :----------- | 
+| ```FlagValveInfo```  | ```SolenoidState```: default close. <br />  ```ActuationType```: default none. <br /> ```ValvePriority```: default none. | 
+
+
+## [Config.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/mcl/Config.hpp) and [Config.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/mcl/Config.cpp)
+
+The ```Config.json``` file, short for configuration, is where we input any variables that might change, like the number of valves or the Ground Station IP address.
+The ```Config.cpp``` and Config.hpp``` files help us process and store this information. The ```Config``` object created, called ```global_config```, is accessible from any file. 
+
+| ```Config(json json)```| 
+| :----------- | 
+| From the json object, initalizes and stores all telemetry, sensor, valve, stage, timer, task, and control task information. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```to_json(json j, const ConfigBoundary boundary)``` <br />  Transfers the data in ```boundary``` to the json object ```j```.  | 
+| ```void```  | ```from_json(json j, const ConfigBoundary boundary)```  <br />  Transfers the data in the json object ```j``` to ```boundary```. | 
+| ```void```  | ```to_json(json j, const ConfigSensorInfo sensor_info)``` <br />   Transfers the sensor data in ```boundary``` to the json object ```j```. | 
+| ```void```  | ```from_json(const json j, ConfigSensorInfo sensor_info)``` <br />   Transfers the sensor data in the json object ```j``` to ```boundary```.  | 
+| ```void```  | ```to_json(json j, const ConfigValveInfo valve_info)``` <br />   Transfers the valve data in ```boundary``` to the json object ```j```. | 
+| ```void```  | ```from_json(const json j, ConfigValveInfo valve_info)``` <br />   Transfers the valve data in the json object ```j``` to ```boundary```.  | 
+
+```Config.hpp``` also defines the following ```structs```:
+
+| Struct     | Description | 
+| :---------- | :----------- | 
+| ```ConfigBoundary```  | ```lower``` <br />  ```upper``` <br /> Stores the minimum and maximum allowable sensor readings. | 
+| ```ConfigState```  | ```safe``` <br />  ```warn``` <br /> Stores the whether the sensor readings have gone beyond the allowable boundaries. | 
+| ```ConfigSensorInfo```  | ```safe``` <br />  ```warn``` <br /> Stores the whether the sensor readings have gone beyond the allowable boundaries. | 
+| ```ConfigValveInfo```  | ```kalman_args```, including ```doubles``` ```process_variance```, ```measurement_variance``` and ```kalman_value```. <br />  ```boundaries```, including ```ConfigStage``` ```waiting```, ```pressurization```, ```autosequence``` and ```postburn```. <br />  | 

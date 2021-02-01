@@ -4,7 +4,36 @@ title: Control Tasks
 sidebar_label: Control Tasks
 ---
 
-**Control Tasks** are Flight Software system's middle-management; they set Flags and tell Tasks how to manipulate the rocket's devices.
+**Control Tasks** are Flight Software system's middle-management; they set Flags and tell [**Tasks**](fs_tasks.mdx) how to manipulate the rocket's devices.
+
+
+## [Control.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/Control.hpp)
+
+This abstract (or virtual) class is the parent class of all other Control Task classes. 
+
+| ```Control()```| 
+| :----------- | 
+| Default parent constructor. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```vitual void```  | ```begin()```  <br />  A method that reads data from the associated Driver and updates the Registry. To be implemented by any subclass. | 
+| ```vitual void```  | ```execute()``` <br />  A method that, depending on the Flags, performs necessary actuations. To be implemented by any subclass.  | 
+
+
+## [ControlTask.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/ControlTask.hpp) and [ControlTask.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/ControlTask.cpp)
+
+This class manages all the Control Tasks. 
+
+| ```ControlTask(set<string> config)```| 
+| :----------- | 
+| Declares a list of all Control Tasks specified in ```config.json```, and initalizes each of items in the list. Logs a message indicating that the Control Tasks have started. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```begin()``` <br />  Logs a message that the Control Tasks are begining, then calls the ```begin()``` method of each. | 
+| ```void```  | ```control()```  <br />  Logs a message that the Control Tasks are running, then calls the ```control()``` method of each. |  
+
 
 ## [SensorControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/SensorControl.hpp) and [SensorControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/SensorControl.cpp)
 
@@ -15,13 +44,13 @@ Control also sends sensor data back to the Ground Station.
 
 | ```SensorControl()```| 
 | :----------- | 
-| Initalizes the interval at which sensor data is sent to GS. Logs an initalization confirmation.|
+| Extends Control. Initalizes the interval at which sensor data is sent to GS. Logs an initalization confirmation.|
 
 
 | Returns     | Description | 
-| :----------- | :----------- | 
-| ```void```  | ```begin()``` <br /> Creates sensor, boundaries, and Kalman dictionaries based on the config file. Logs a startup confirmation      | 
-| ```void```  | ```execute()```  <br /> Calls ```boudary_check()``` and, if enough time has passed, ```send_sensor_data()```      | 
+| :---------- | :----------- | 
+| ```void```  | ```begin()``` <br /> Creates sensor, boundaries, and Kalman dictionaries based on the config file. Logs a startup confirmation.      | 
+| ```void```  | ```execute()```  <br /> Calls ```boudary_check()``` and, if enough time has passed, ```send_sensor_data()```.      | 
 | ```void```  | ```boudary_check()``` <br />  Ensures sensor values aren't outside the allowed boundaries. If they are, updates Registry with the appropriate ```SensorStatus```.| 
 | ```void```  | ```send_sensor_data()``` <br />  Adds sensor data to the list of logs in Flag.  | 
 
@@ -35,7 +64,7 @@ a certain amount of time. It also sends valve data back to the Ground Station.
 
 | ```ValveControl()```| 
 | :----------- | 
-| Initalizes the interval at which valve data is sent to GS. Logs an initalization confirmation.|
+| Extends Control. Initalizes the interval at which valve data is sent to GS. Logs an initalization confirmation.|
 
 
 | Returns     | Description | 
@@ -48,3 +77,62 @@ a certain amount of time. It also sends valve data back to the Ground Station.
 | ```void```  | ```check_abort()``` <br />  If registry indicates an abort, calls ```abort()```. Otherwise, if soft abort has been cancelled, calls ```undo_abort```| 
 
 
+## [TelemetryControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/TelemetryControl.hpp) and [TelemetryControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/TelemetryControl.cpp)
+
+Telemetry Control processes and acts upon incoming messages from GS.
+
+| ```TelemetryControl()```| 
+| :----------- | 
+| Extends Control. Declares ```arguments```, which stores telemetry-related variables. Logs a message indicating Telemetry Control has started. |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```begin()``` <br />  Opens the telemetry connection to GS, then calls ```make_fuctions()```. | 
+| ```void```  | ```execute()```  <br />  If the telemetry connection is open, reads all the packets in the ingest queue and calls ```ingest()``` for each. | 
+| ```void```  | ```ingest(Log log)``` <br />   If the command from GS in not recognized, throws a packet argument error. Otherwise, calls the function to perform the command. | 
+| ```void```  | ```heartbeat(vector<string> args)``` <br />   Logs a heartbeat message to indicate that FS and GS are communicating without issues.  | 
+| ```void```  | ```soft_abort(vector<string> args)``` <br />  Sets the rocket's status in the Registry to soft, creates a Flag to begin soft abort procedures, and logs a message indicating that the rocket is undergoing soft abort.  | 
+| ```void```  | ```reset_to_normal(vector<string> args)``` <br />  Undoes a soft abort command. Resets the rocket's status in the Registry to normal, updates the Flag to resume normal procedures, and logs a message indicating that the soft abort is being undone.  | 
+| ```void```  | ```solenoid_actuate(vector<string> args)``` <br />  If the priority is high enough, actuates the appropriate solenoid according to the GS command. Logs a message indicating success or failure. | 
+| ```void```  | ```sensor_request(vector<string> args)``` <br />  Reads the data from the sensor given in the ```args```, if the sensor exists. Logs a message with the data, or a message indicating failure. | 
+| ```void```  | ```valve_request(vector<string> args)``` <br />  Reads the data from the valve given in the ```args```, if the valve exists. Logs a message with the data, or a message indicating failure.  | 
+| ```void```  | ```progress(vector<string> args)``` <br />  Sets the progress field in the Registry to true, indicating that the rocket may continue to the next Stage.  | 
+| ```void```  | ```test(vector<string> args)``` <br />  Logs a message indicating that the message from GS has been recieved.  | 
+| ```void```  | ```make_fuctions()```  <br />  This method stores a list of all commands the GS can make, and maps the string command to the association function. | 
+
+
+## [PressureControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/PressureControl.hpp) and [PressureControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/PressureControl.cpp)
+
+Description. 
+
+| ```PressureControl()```| 
+| :----------- | 
+| Extends Control. Declares a list of sensors, valves, and active stages. Also declares ```matchups```, which connects pressure sensors to the valves the regulate pressure in that area.  |
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```begin()``` <br />  Initalizes the sensor-valve pairs in ```matchups``` and logs a startup message. | 
+| ```void```  | ```execute()```  <br />  Calls ```check_pressure()```. | 
+| ```void```  | ```check_pressure()``` <br />   For every pair in matchups, if the pressure reading is at warning or critical levels, opens the associated valve to fix the problem. Once pressure levels return to normal, closes the valve. | 
+
+:::danger
+The else-if of ```check_pressure()``` has an error: we need to **close** the valve once pressure levels return to normal.
+:::
+
+## [StageControl.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/e48a34618497decfc76fcca128f6dc082e0124db/include/flight/modules/control_tasks/StageControl.hpp) and [StageControl.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/control_tasks/StageControl.cpp)
+
+Description. 
+
+| ```StageControl()```| 
+| :----------- | 
+| Extends Control. Declares variables to store information about the current stage. Notes when the Stage Control Task began. Logs a startup message.|
+
+| Returns     | Description | 
+| :---------- | :----------- | 
+| ```void```  | ```begin()``` <br />  Enters FS into the first stage.  | 
+| ```void```  | ```execute()```  <br />  Calls ```calcuate_status()```. If the rocket needs to move to the next Stage, calls ```progress()```. Otherwise, if the rocket is ready for the next Stages, calls ```stage_progression_request()```. Finally, calls ```stage_valve_control()``` and ```send_data()```. | 
+| ```double```  | ```calcuate_status()``` <br />   Based on the Stage and rocket's situation, returns a double indicating what percentage of the stage has been completed. | 
+| ```void```  | ```send_progression_request()``` <br />   Logs a message indicating that the rocket is ready for the next Stage.  | 
+| ```void```  | ```send_data()``` <br />   Logs a message with the State progress.  | 
+| ```void```  | ```progress()``` <br />  Moves the rocket to the next Stage.  | 
+| ```void```  | ```stage_valve_control()``` <br />  Actuates the valves based on the current Stage.  | 
