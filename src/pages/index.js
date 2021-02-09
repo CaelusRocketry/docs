@@ -12,11 +12,11 @@ const IndexPage = () => {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />"
+      description="Project Caelus' official documentation site."
     >
       <main className={styles}>
         <section className={styles.top}>
-          <img src="../../static/img/logo.svg"></img>
+          <img src="/img/logo.svg"></img>
           <p>Welcome to Project Caelus' documentation site!</p>
         </section>
       </main>
