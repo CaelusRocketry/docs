@@ -2,11 +2,11 @@ const remarkMath = require("remark-math");
 const rehypeKatex = require("rehype-katex");
 
 module.exports = {
-  title: "Project Caelus",
-  tagline: "The tagline of my site",
+  title: "Docs | Project Caelus",
+  tagline: "Project Caelus' official documentation site.",
   url: "https://docs.projectcaelus.org",
   baseUrl: "/",
-  favicon: "img/favicon.png",
+  favicon: "img/favicon.svg",
   organizationName: "ProjectCaelus", // Usually your GitHub org/user name.
   projectName: "docs", // Usually your repo name.
   themeConfig: {
@@ -14,7 +14,8 @@ module.exports = {
       title: "Project Caelus",
       logo: {
         alt: "Project Caelus",
-        src: "img/logo.svg",
+        src: "img/banner-transparent.svg",
+        srcDark: "img/banner-dark.svg",
       },
       items: [
         { to: "docs/index", label: "Docs", position: "left" },

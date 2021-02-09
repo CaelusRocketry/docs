@@ -11,7 +11,7 @@ const Logo = () => {
   const { isDarkTheme, setLightTheme, setDarkTheme } = useThemeContext();
   return (
     <img
-      src={isDarkTheme ? "/img/logo-dark.svg" : "/img/logo.svg"}
+      src={isDarkTheme ? "/img/banner-dark.svg" : "/img/banner-transparent.svg"}
       alt="Logo"
     />
   );
@@ -19,17 +19,27 @@ const Logo = () => {
 
 const IndexPage = () => {
   const context = useDocusaurusContext();
-
   const { siteConfig = {} } = context;
+
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
+      title="Welcome to the docs!"
       description="Project Caelus' official documentation site."
     >
       <main className={styles}>
         <section className={styles.top}>
           <Logo />
           <p>Welcome to Project Caelus' documentation site!</p>
+        </section>
+        <section className={styles.links}>
+          <p>
+            To view our documentation, click on the{" "}
+            <a href="/docs/index">Docs page</a>.
+          </p>
+          <p>
+            To view our general website, click{" "}
+            <a href="https://www.projectcaelus.org">here</a>.
+          </p>
         </section>
       </main>
     </Layout>
