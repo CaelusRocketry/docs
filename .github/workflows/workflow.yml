@@ -1,4 +1,4 @@
-name: Deploy to production
+name: Build and deploy 
 
 on:
   pull_request:
@@ -7,13 +7,12 @@ on:
       - master
 
 jobs:
-  deploy:
-    name: Deploy
+  main:
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js v12
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version: '12'
       - name: Install dependencies
