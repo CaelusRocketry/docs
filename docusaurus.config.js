@@ -16,7 +16,7 @@ module.exports = {
                 alt: 'Project Caelus',
                 src: 'img/logo.svg'
             },
-            links: [
+            items: [
                 { to: 'docs/index', label: 'Docs', position: 'left' },
                 { to: 'https://projectcaelus.org/blog', label: 'Blog', position: 'left' },
                 {
