@@ -1,12 +1,10 @@
 ---
-id: gs_backend
-title: Backend
-sidebar_label: Backend
+title: Back-end
 ---
 
 ## Overview
 
-The **GS backend**, also called the **server**, is responsible for shuffling message from _Flight Software_ to the frontend display and vice versa.
+The **GS back-end**, also called the **server**, is responsible for shuffling message from _Flight Software_ to the frontend display and vice versa.
 The server is hosted as a Python Flask Application.
 It uses **TCP Sockets** to communicate with the _Flight Software_ and **SocketIO** to communicate with the frontend UI.
 
@@ -39,12 +37,14 @@ python3 main.py
 **Write something about flask**
 
 ### SocketIO
+
 **SocketIO** manages the two-way communication process between the frontend and backend.
 
 SocketIO forwards messages from Flight Software to the frontend using three methods, based on the header of the incoming message.
-- update_general method
-- update_sensor_data
-- update_valve_data
+
+- `update_general method`
+- `update_sensor_data`
+- `update_valve_data`
 
 To inform Flight Software of a button press on the front end, SocketIO receives a dictionary of information from the frontend, packages into a Log, then Packet, and enqueues it into telemetry in the on_button_press method.
 
@@ -52,6 +52,4 @@ To inform Flight Software of a button press on the front end, SocketIO receives 
 
 ## Telemetry
 
-Telemetry manages all communication between Flight Software and the backend using TCP Sockets. It can send and receive messages to and from Flight Software. Once it receives a messages, it classifies each log as one of general, sensor, or valve, and calls the corresponding socketio method to handle the data. Telemetry also continuously asks Flight Software for heartbeat messages to ensure the communication between the two is alive. 
-
-
+Telemetry manages all communication between Flight Software and the backend using TCP Sockets. It can send and receive messages to and from Flight Software. Once it receives a messages, it classifies each log as one of general, sensor, or valve, and calls the corresponding socketio method to handle the data. Telemetry also continuously asks Flight Software for heartbeat messages to ensure the communication between the two is alive.

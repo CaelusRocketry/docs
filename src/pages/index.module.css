@@ -1,18 +1,18 @@
 main {
-    margin: 50px;
+  margin: 50px;
 }
 
 section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 section.top {
-    text-align: center;
+  text-align: center;
 }
 section.top p {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 section.top img {
-    height: 200px;
-    margin-bottom: 30px;
+  height: 200px;
+  margin-bottom: 30px;
 }

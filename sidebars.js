@@ -6,13 +6,29 @@
  */
 
 module.exports = {
-    someSidebar: {
-        Overview: ['index'],
-        Propulsion: [],
-        Electronics: ['elec_launchbox'],
-        "Flight Software (FS)": ['fs_overview', 'fs_setup', 'fs_mcl', 'fs_tasks', 'fs_control_tasks', 'fs_drivers', 'fs_lib', 'fs_common_errors'],
-        "Ground Software (GS)": ['gs_setup', 'gs_backend', 'gs_frontend', 'gs_common_errors'],
-        Website: ['web_frontend', 'web_sanity']
-    
-    }
+  docs: {
+    Overview: ["index"],
+    Propulsion: [],
+    Electronics: ["launchbox"].map((page) => `electronics/${page}`),
+    Programming: [
+      {
+        "Flight Software": [
+          "overview",
+          "setup",
+          "mcl",
+          "tasks",
+          "control-tasks",
+          "drivers",
+          "lib",
+          "errors",
+        ].map((page) => `programming/fs/${page}`),
+      },
+      {
+        "Ground Software": ["setup", "back-end", "front-end", "errors"].map(
+          (page) => `programming/gs/${page}`
+        ),
+      },
+    ],
+    Website: ["front-end", "cms"].map((page) => `website/${page}`),
+  },
 };

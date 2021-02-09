@@ -1,0 +1,75 @@
+---
+title: Tasks
+---
+
+Tasks work with [**Drivers**](drivers.mdx) to directly communicate with hardware, for example actuating valves, reading sensor values, and sending data to the Ground Station via telemetry.
+
+## [Task.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/include/flight/modules/tasks/Task.hpp)
+
+This abstract (or virtual) class is the parent class of all other Task classes.
+
+| `Task()`                    |
+| :-------------------------- |
+| Default parent constructor. |
+
+| Returns        | Method        | Description                                                                                                                           |
+| :------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `virtual void` | `initalize()` | To be implemented by any subclass.                                                                                                    |
+| `vitual void`  | `read()`      | Reads data from the associated Driver and updates the [**Registry**](mcl.mdx). To be implemented by any subclass.                     |
+| `vitual void`  | `actuate()`   | Reads pending actions presented in the [**Flag**](mcl.mdx) and performs the corresponding actions. To be implemented by any subclass. |
+
+## [SensorTask.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/include/flight/modules/tasks/SensorTask.hpp) and [SensorTask.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/tasks/SensorTask.cpp)
+
+_We're currently working on writing code to command read data from real sensors!_
+
+When testing the code locally (without any hardware), ‌SensorTask configures a `PseudoSensor`, a simulated sensor that mimics generating data to help us test our code. Sensor Task reads from all the sensors and
+stores the data in the Registry.
+
+| `SensorTask()`                                  |
+| :---------------------------------------------- |
+| Defaults to constructor of the Task superclass. |
+
+| Returns | Method        | Description                                                                                                             |
+| :------ | :------------ | :---------------------------------------------------------------------------------------------------------------------- |
+| `void`  | `initalize()` | Generates a list of sensors and a sensor arduino, then logs an initalization message.                                   |
+| `void`  | `read()`      | Calls the `read()` method of the sensor arduino, processes the incoming data, and correspondingly updates the Registry. |
+| `void`  | `actuate()`   | Empty method. **In the future this will contain sensor calibration**                                                    |
+
+## [ValveTask.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/include/flight/modules/tasks/ValveTask.hpp) and [ValveTask.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/tasks/ValveTask.cpp)
+
+_We're currently working on writing code to command real valves!_
+
+When testing the code locally (without any hardware), Valve Task configures a `PseudoValve`, a simulated valve that emulates a real solenoid valve. ValveTask updates the Registry with the corresponding valve states and actuation information.
+It also monitors the actuation commands in the Flag, and if appropriate, directs the valves to actuate.
+
+| `ValveTask()`                                       |
+| :-------------------------------------------------- |
+| Defaults to the constructor of the Task superclass. |
+
+| Returns | Method                | Description                                                                                                                                                                                                                 |
+| :------ | :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`  | `begin()`             | Calls the `send_valve_info()` method.                                                                                                                                                                                       |
+| `void`  | `send_valve_info()`   | Converts valve commands to byte information, then sends the command to the Arduino.                                                                                                                                         |
+| `void`  | `get_command()`       | _Note: Declared in the .hpp file but never implemented - needs to be removed._                                                                                                                                              |
+| `void`  | `initalize()`         | Generates a list of valves and a valve arduino, then logs an initalization message.                                                                                                                                         |
+| `void`  | `read()`              | Calls the `read()` method of the valve arduino, converts the data from bytes into state and actuation information, and updates the Registry.                                                                                |
+| `void`  | `actuate()`           | Calls `actuate_solenoids()`.                                                                                                                                                                                                |
+| `void`  | `actuate_solenoids()` | For each solenoid, if the actuation priority is greater than the current priority, directs the Arduino to actuate the solenoid. Otherwise, denies the actuation request. Updates Registry and Flag information accordingly. |
+
+## [TelemetryTask.hpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/include/flight/modules/tasks/TelemetryTask.hpp) and [TelemetryTask.cpp](https://github.com/ProjectCaelus/cpp-flight-software/blob/master/src/modules/tasks/TelemetryTask.cpp)
+
+The Telemetry Task handles the process that flow into and out of the FS. Three priority queues govern telemetry actions:
+the `ingest_queue`, containing all packets from GS that need to be processed;
+the `enqueue_queue`, containing all packets FS wants to send to GS;
+and the `send_queue`, containing all packets that will be sent during the ongoing Actuate phase of the RCA loop.
+
+| `TelemetryTask()`                                   |
+| :-------------------------------------------------- |
+| Defaults to the constructor of the Task superclass. |
+
+| Returns | Method        | Description                                                                                                                                                 |
+| :------ | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `void`  | `initalize()` | Opens the telemetry connection to GS.                                                                                                                       |
+| `void`  | `read()`      | If the connection to GS is open, this method pushes all recieved packets to the inngest queue.                                                              |
+| `void`  | `enqueue()`   | A helper method that pushes each packet that has been enqueued into the send queue.                                                                         |
+| `void`  | `actuate()`   | If a Flag indicates that a reset is required, calls the telemetry reset method. Otherwise, calls `enqueue()` and sends all packets in the send queue to GS. |

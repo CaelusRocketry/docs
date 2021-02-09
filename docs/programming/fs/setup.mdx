@@ -1,0 +1,44 @@
+---
+title: Setup
+---
+
+## Instructions
+
+:::caution
+These instructions, though recent, may not have been tested. Please let us know if you try this and it does not work. Good luck!
+:::
+
+1. Apply for the [Jetbrains free educational license](https://www.jetbrains.com/shop/eform/students) using your TJ webmail email.
+2. Go to [your licenses page](https://account.jetbrains.com/licenses/assets) and download CLion.
+3. In your terminal, `git clone` our [Flight Software](https://github.com/ProjectCaelus/cpp-flight-software).
+4. Use [this tutorial](https://www.jetbrains.com/help/clion/quick-cmake-tutorial.html) to configure a CMake project.
+
+### Windows-specific Instructions
+
+On Windows, you have two options to get your C++ Flight Software working: Windows Subsystem for Linux (WSL) or Boost. Note that using Boost isn't always successful.
+
+To use WSL:
+
+1. Ensure your version of Windows supports Hyper V Virtualization.
+2. Get [Ubuntu](https://www.microsoft.com/store/productId/9NBLGGH4MSV6) from the Microsoft Store. Make sure you've installed WSL1, not WSL2.
+
+To use Boost:
+
+1. Follow [these intructions](http://robots.uc3m.es/gitbook-installation-guides/install-boost.html#install-boost-windows) to install Boost.
+
+### Mac-specific Intrustions
+
+1. Install [Homebrew](https://brew.sh/), if you do not already have it.
+2. Using homebrew, install [Boost](https://www.boost.org/) with the command `brew install boost`.
+3. Next, you need to change the C++ complier, because the default complier CLion uses is too old. Run the command `brew install gcc`.
+4. Use the Finder app (?) to find the directory gcc was installed in. Within that folder, navigate to `bin`.
+5. Locate the c++-10 executable complier. This is one you need. Copy and save the full path to this complier.
+6. Follow [these instruction](https://www.jetbrains.com/help/clion/how-to-switch-compilers-in-clion.html) to change the complier on CLion to the path you just located.
+
+## Run the code!
+
+1. Set up your [Ground Software](../gs/setup.mdx)
+2. In the client folder of the Ground Software repo, run `npm start`.
+3. In the server folder of the Ground Software repo, run `python main.py` on Windows or `python3 main.py` on Mac.
+
+Pro tip: If you want to run the code locally, add `--config local` to end of the command.
