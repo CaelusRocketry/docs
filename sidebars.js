@@ -8,7 +8,18 @@
 module.exports = {
   docs: {
     Overview: ["index"],
-    Propulsion: [],
+    Propulsion: [
+      {
+        "Aphlex Engine Design": [
+            "overview",
+        ].map((page) => `propulsion/aphlex/${page}`),
+      },
+      {
+        "Callisto Rocket Development": [
+            "general",
+        ].map((page) => `propulsion/callisto/${page}`),
+      }
+    ],
     Electronics: ["launchbox"].map((page) => `electronics/${page}`),
     Programming: [
       {
