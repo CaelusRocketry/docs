@@ -1,1 +1,56 @@
-## Hi
+---
+title: Aphlex 1C Engine - Injector
+sidebar_label: Injector
+---
+
+## Overview
+Intro Paragraph - write about stuffs
+
+## Inputs
+- mdot = Mass flow rate, kg/sec
+- OF = Oxidizer to fuel ratio, dimensionless
+- rho_f = Fuel density, kg/m^3
+- rho_o = Oxidizer density, kg/m^3
+- P0, Chamber pressure, Pa
+- delta_p = Pressure drop across injector, % (of chamber pressure)
+- d_o = Starting diameter of oxidizer orifice, mm (1.58)
+- Cd_o = Discharge coefficient of oxidizer orifice, dimensionless (0.9)
+- d_f = Starting diameter of fuel orifice, mm (1.00)
+- Cd_f = Discharge coefficient of fuel orifice, dimensionless (0.88)
+- imp_angle = Impingement angle, degrees (60)
+
+
+
+| Name | Symbol | Value | Unit |
+| :----------- | :------------ | :--- | :--- |
+| Example | $E$ | 5 | kN |
+| Total Mass Flow Rate | $\dot{m}$ | 
+
+## Functions
+| Name | Equation | Reference |
+| :- | :---------------------------------- | :------ |
+| Total area of orifices | $A = Q/(C_{d}\sqrt[2\rho\delta{p})]$ | |
+| Number of orifices | $N = \dot{M_{o}}/
+
+## Outputs
+| Name | Symbol | Oxidizer Value | Fuel Value | Unit |
+| :----------- | :------------ | :--- | :--- | :--- |
+| Example | $E$ | 5 | kN |
+
+- n_o = Number of oxidizer orifices
+- d_o = Diameter of oxidizer orifice, mm
+- a_o = Area of oxidizer orifice, mm
+- L_jet_o = Oxidizer jet length, mm
+- L_poi_o = Oxidizer point of impigement distance, mm
+- d_com_o = Oxidizer orifice distance (combustor), mm
+- d_man_o = Oxidizer orifice distance (manifold), mm
+
+- n_f = Number of fuel orifices
+- d_f = Diameter of fuel orifice, mm
+- a_f = Area of fuel orifice, mm
+- L_jet_f = Fuel jet length, mm
+- L_poi_f = Fuel point of impigement distance, mm
+- d_com_f = Oxidizer fuel distance (combustor), mm
+- d_man_f = Oxidizer fuel distance (manifold), mm
+
+- L_inj = Injector plate thickness
