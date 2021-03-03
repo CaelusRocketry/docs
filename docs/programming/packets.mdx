@@ -1,0 +1,37 @@
+---
+title: Packets
+---
+
+# Telemetry Packet Format
+
+Packets are used to communicate between the rocket and the ground station. They convey information about the state of the rocket, alert the ground station of any updates, and enable the ground station to make adjustments to the rocket before launch.
+
+*Important Note*: Packets can only be sent to the rocket BEFORE launch, not AFTER. This is to comply with regulations.
+
+## Packets FROM ground software TO flight software
+
+|Header                              |Message Format     |
+|------------------------------------|-------------------|
+|set_abort_level (To be implemented) |`Level: AbortLevel`|
+|soft_abort (deprecated)             |                   |
+|undo_soft_abort (deprecated)        |                   |
+|progress                            |                   |
+|solenoid_actuate                    |`valve_type: X,`<br/>`valve_location: X,`<br/>`actuation_type: X,`<br/>`actuation_priority: X`|
+|valve_request                       |`valve_type: X,`<br/>`valve_location: X`    |
+|sensor_request                      |`sensor_type: X,`<br/>`sensor_location: X`  |
+
+## Packets FROM flight software TO ground software
+
+| Header                   | Message Format                                                                                                                  |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| control_task_start       | `task: stage \| pressure \| telemetry \| valve \| sensor`                                                                       |
+| stage_status             | `stage: X`<br>`status: X`                                                                                                         |
+| abort_level              | `level: AbortLevel`                                                                                                             |
+| abort_request_response   | `successful: boolean<br>level: AbortLevel`                                                                                      |
+| heartbeat                | `timestamp: X`                                                                                                                  |
+| sensor_data              | `[type]: {`<br>&nbsp;&nbsp;`[location]: {`<br>&nbsp;&nbsp;&nbsp;&nbsp;`measured_value: X`<br>&nbsp;&nbsp;&nbsp;&nbsp;`normalized_value: X`<br>&nbsp;&nbsp;&nbsp;&nbsp;`status: X`<br>&nbsp;&nbsp;`}`<br>`}` |
+| abort_alert              | `level: none \| soft \| hard`<br>`dangerous_sensors?: [`<br>&nbsp;&nbsp;`type: X`<br>&nbsp;&nbsp;`location: X`<br>&nbsp;&nbsp;`normalized_value: X`<br>`]`        |
+| valve_actuation_response | `type: X`<br>`location: X`<br>`found: boolean`<br>`successful: boolean`                                                               |
+| valve_request_response   | `type: X`<br>`location: X`<br>`found: boolean`<br>`actuation_type?: X`<br>`actuation_priority?: X`                                      |
+| valve_data               | `[type]: {`<br>&nbsp;&nbsp;`[location]: {`<br>&nbsp;&nbsp;&nbsp;&nbsp;`actuation_type: X`<br>&nbsp;&nbsp;&nbsp;&nbsp;`actuation_priority: X`<br>&nbsp;&nbsp;`    }`<br>`}`                    |
+| valve_actuated           | `type: X`<br>`location: X`                                                                                                        |
