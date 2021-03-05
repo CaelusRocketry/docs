@@ -4,7 +4,7 @@ sidebar_label: CEAgui
 ---
 
 ## Overview
-The second step in designing the Aphlex 1C engine is to calculate several chemical and thermodynamic parameters using CEAgui. CEAgui (Chemical Equilibrium with Applications) is a program developed by NASA's Glenn Research Center for calculating advanced chemical properties and interactions for propellant combustion in rocket engines. By using CEAgui, we can find values for the ratio of specific heats ($k$), combustion temperature ($T_0$), molecular mass of gas ($M$), characteristic velocity ($c*$), and specific impulse ($Isp$).
+The first step in designing the Aphlex 1C engine is to calculate several chemical and thermodynamic parameters using CEAgui. CEAgui (Chemical Equilibrium with Applications) is a program developed by NASA's Glenn Research Center for calculating advanced chemical properties and interactions for propellant combustion in rocket engines. By using CEAgui, we can find values for the ratio of specific heats ($k$), combustion temperature ($T_0$), molecular mass of gas ($M$), characteristic velocity ($c*$), and specific impulse ($Isp$).
 
 ## Inputs
 

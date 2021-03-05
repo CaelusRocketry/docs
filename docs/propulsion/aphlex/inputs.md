@@ -1,6 +1,6 @@
 ---
-title: Aphlex 1C - Engine Inputs
-sidebar_label: Inputs Overview
+title: Aphlex 1C Engine - Inputs
+sidebar_label: Input Overview
 ---
 | Name | Symbol | Description | Value | Unit | CEAgui | Nozzle | Propsim | Injector |
 | :-------- | :----------- | :--------------------------------- | :-- | :-- | :-- | :-- | :-- | :-- |
