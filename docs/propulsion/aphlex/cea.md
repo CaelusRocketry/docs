@@ -9,7 +9,7 @@ The first step in designing the Aphlex 1C engine is to calculate several chemica
 ## Inputs
 
 | Name | Symbol | Description | Value | Unit |
-| :----------- | :------------ | :------------------------------------------------------------------------------------ | :--- | :--- 
+| :----------- | :------------ | :------------------------------------------------------------------------------------ | :--- |
 | Oxidizer to Fuel Ratio | $O/F$ |Ratio of mass of oxidizer to fuel | | No Units |
 | Chamber Pressure | $P_0$ | | | $Pa$ |
 | Altitude | $H$ | | | $m$ |

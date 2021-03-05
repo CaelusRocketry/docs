@@ -11,7 +11,8 @@ module.exports = {
             "nozzle",
             "injector",
             "propsim",
-            "outputs"
+            "outputs",
+            "optimization"
         ].map((page) => `propulsion/aphlex/${page}`),
       },
       {

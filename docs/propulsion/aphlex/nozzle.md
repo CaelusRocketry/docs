@@ -7,16 +7,16 @@ sidebar_label: Nozzle
 The second step in designing the Aphlex 1C engine is the nozzle portion, which takes in key input parameters and combustion properties produced by the CEAgui portion of the program. The outputs are key dimensions and properties of the rocket nozzle, which can then be used to design and manufacture optimal geometries. Mass flow rate is also calculated, which is essential for fluid flow and injector calculations.
 
 ## Inputs
-| Name | Symbol | Value | Unit |
-| :----------- | :------------ | :--- | :--- |
-| Desired Thrust | $F$ | 5 | kN |
-| Chamber Pressure | $P_{0}$ | placeholder | MPa |  
-| Altitude (optional) | $ALT$ | placeholder | unit |
-| Oxidizer to fuel ratio | $O/F$ | placeholder | dimensional | 
-| Combustion chamber temperature| $TO$ | placeholder | K | 
-| Molecular mass of the gas | $M$ | placeholder | kg/mol | 
-| Ratio of specific hear capacities | $k$ | placeholder | dimensionless | 
-| Characteristic chamber length | $L*$ | placeholder | m |  
+| Name | Symbol | Value | Unit | Origin |
+| :----------- | :------------ | :--- | :--- | :--- |
+| Desired Thrust | $F$ | 5 | kN | |
+| Chamber Pressure | $P_{0}$ | placeholder | MPa | |
+| Altitude (optional) | $ALT$ | placeholder | unit | |
+| Oxidizer to fuel ratio | $O/F$ | placeholder | dimensional | | 
+| Combustion chamber temperature| $TO$ | placeholder | K |  |
+| Molecular mass of the gas | $M$ | placeholder | kg/mol |  |
+| Ratio of specific hear capacities | $k$ | placeholder | dimensionless | | 
+| Characteristic chamber length | $L*$ | placeholder | m |  |
 
 ## Formulas
 | Name | Equation | Reference |
