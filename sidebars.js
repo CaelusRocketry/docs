@@ -43,6 +43,11 @@ module.exports = {
       "programming/packets",
     ],
     Website: ["front-end", "cms"].map((page) => `website/${page}`),
+    Livestreaming: [
+      "obs", 
+      "stream_setup", 
+      "streaming",
+    ].map((page) => `livestreaming/${page}`),
   },
 };
 26;
