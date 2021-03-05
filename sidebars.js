@@ -4,21 +4,21 @@ module.exports = {
     Propulsion: [
       {
         "Aphlex Engine Design": [
-            "parameter_overview",
-            "design_overview",
-            "inputs",
-            "cea",
-            "nozzle",
-            "injector",
-            "propsim",
-            "outputs"
+          "parameter_overview",
+          "design_overview",
+          "inputs",
+          "cea",
+          "nozzle",
+          "injector",
+          "propsim",
+          "outputs",
         ].map((page) => `propulsion/aphlex/${page}`),
       },
       {
-        "Callisto Rocket Development": [
-            "general",
-        ].map((page) => `propulsion/callisto/${page}`),
-      }
+        "Callisto Rocket Development": ["general"].map(
+          (page) => `propulsion/callisto/${page}`
+        ),
+      },
     ],
     Electronics: ["launchbox"].map((page) => `electronics/${page}`),
     Programming: [
@@ -39,8 +39,10 @@ module.exports = {
           (page) => `programming/gs/${page}`
         ),
       },
+      "programming/packets",
     ],
     Website: ["front-end", "cms"].map((page) => `website/${page}`),
   },
-};26
+};
+26;
 // uh oh stinky
