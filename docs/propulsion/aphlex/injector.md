@@ -9,16 +9,16 @@ The third step in designing the Aphlex 1C engine is the injector portion, which 
 ## Inputs
 | Name | Symbol | Value | Unit | Origin |
 | :----------- | :------------ | :--- | :--- | :--- |
-| Total Mass Flow Rate | $\dot{m}$ | | $\frac{kg}{sec}$ | |
+| Total Mass Flow Rate | $\dot{m}$ | | $kg/s$ | |
 | Oxidizer to fuel ratio | $OF$ | | dimensionless | |
-| Fuel density | $\rho_{f}$  | | $\frac{kg}{m^{3}}$ | |
-| Oxidizer density | $\rho_{o}$ | | $\frac{kg}{m^{3}}$ | |
-| Chamber pressure | $P_{0}$ | | Pa | |
-| Pressure drop across injector | $\Delta_{p}$ | | % (of chamber pressure) | |
-| Starting diameter of oxidizer orifice | $d_{o}$ | 1.58 | mm | |
-| Discharge coefficient of oxidizer orifice | $Cd_{o}$ | 0.9 | dimensionless | |
-| Starting diameter of fuel orifice | $d_{f}$ | 1.00 | mm | |
-| Discharge coefficient of fuel orifice | $Cd_{f}$ | 0.88 | dimensionless | | 
+| Fuel density | $\rho_{f}$  | | $kg/m^3$ | |
+| Oxidizer density | $\rho_{o}$ | | $kg/m^3$ | |
+| Chamber pressure | $P_{0}$ | | $Pa$ | |
+| Pressure drop across injector | $\Delta{P}$ | | % (of chamber pressure) | |
+| Starting diameter of oxidizer orifice | $d_{o}$ | 1.58 | $mm$ | |
+| Discharge coefficient of oxidizer orifice | $C_{d_{o}}$ | 0.9 | dimensionless | |
+| Starting diameter of fuel orifice | $d_{f}$ | 1.00 | $mm$ | |
+| Discharge coefficient of fuel orifice | $C_{d_{f}}$ | 0.88 | dimensionless | | 
 | Impingement angle | $\lambda$ | 60 | °degrees | | |
 | Jet length to distance between orifices ratio* | $\frac{L}{D}$ | 6 | dimensionless | |
 *Obtained from NASA SP-8089
@@ -38,8 +38,8 @@ The third step in designing the Aphlex 1C engine is the injector portion, which 
 | Fuel imingmenet distance | $L_{POI_{f}} = L_{jet_{f}}\cos\lambda$
 | Oxidizer combustor orifice distance | $d_{com_{o}} = 2L_{jet_{o}}sin (90\degree - \lambda)$| |
 | Fuel combustor orifice distance | $d_{com_{f}} = 2L_{jet_{f}}sin (90\degree - \lambda)$| |
-| Oxidizer manifold orifice distance |$d_{man_{o}} =\frac{\frac{d_{com_{o}}}{L_{POI_{o}}}}{L_{inj}+L_{POI_{o}}} $|
-| Fuel manifold orifice distance | $d_{man_{f}} =\frac{\frac{d_{com_{f}}}{L_{POI_{f}}}}{L_{inj}+L_{POI_{f}}} $ |
+| Oxidizer manifold orifice distance |$d_{man_{o}} =\frac{\frac{d_{com_{o}}}{L_{POI_{o}}}}{L_{inj}+L_{POI_{o}}}$|
+| Fuel manifold orifice distance | $d_{man_{f}} =\frac{\frac{d_{com_{f}}}{L_{POI_{f}}}}{L_{inj}+L_{POI_{f}}}$ |
 
 ## Program Structure and Functions
 To Be Completed
@@ -48,17 +48,17 @@ To Be Completed
 | Name | Symbol | Value | Unit |
 | :- | :---------------------------------- | :---- | :------ |
 | Oxidizer orifice number | $n_{o}$| | dimensionless |
-| Oxidizer orifice diameter | $d_{o}$ |  | mm |
-| Oxidizer orifice area | $a_{o}$  | | mm$^{2}$ |
-| Oxidizer jet length | $L_{jet_{o}}$ | | mm |
-| Oxidizer impingement distance | $L_{poi_{o}}$ | | mm |
-| Oxidizer combustor orifice distance | $d_{com_o}$ | | mm |
-| Oxidizer manifold orifice distance | $d_{man_o}$ | | mm |
+| Oxidizer orifice diameter | $d_{o}$ |  | $mm$ |
+| Oxidizer orifice area | $a_{o}$  | | $mm^{2}$ |
+| Oxidizer jet length | $L_{jet_{o}}$ | | $mm$ |
+| Oxidizer impingement distance | $L_{poi_{o}}$ | | $mm$ |
+| Oxidizer combustor orifice distance | $d_{com_o}$ | | $mm$ |
+| Oxidizer manifold orifice distance | $d_{man_o}$ | | $mm$ |
 | Fuel orifice number | $n_{f}$ | | dimensionless |
-| Fuel orifice diameter | $d_{f}$ | | mm |
-| Fuel orifice area | $a_{f}$ | | mm$^{2}$ | 
-| Fuel jet length | $L_{jet_{f}}$ | | mm |
-| Fuel impingement distance | $L_{poi_{f}}$ | | mm |
-| Fuel combustor orifice distance | $d_{com_{f}} $ | | mm |
-| Fuel manifold orifice distance | $d_{man_{f}}$ | | mm |
-| Injector plate thickness | $L_{inj}$ | | mm |
+| Fuel orifice diameter | $d_{f}$ | | $mm$ |
+| Fuel orifice area | $a_{f}$ | | $mm^{2}$ | 
+| Fuel jet length | $L_{jet_{f}}$ | | $mm$ |
+| Fuel impingement distance | $L_{poi_{f}}$ | | $mm$ |
+| Fuel combustor orifice distance | $d_{com_{f}}$ | | $mm$ |
+| Fuel manifold orifice distance | $d_{man_{f}}$ | | $mm$ |
+| Injector plate thickness | $L_{inj}$ | | $mm$ |

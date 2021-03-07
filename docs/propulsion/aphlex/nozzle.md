@@ -9,14 +9,14 @@ The second step in designing the Aphlex 1C engine is the nozzle portion, which t
 ## Inputs
 | Name | Symbol | Value | Unit | Origin |
 | :----------- | :------------ | :--- | :--- | :--- |
-| Desired Thrust | $F$ | 5 | kN | |
-| Chamber Pressure | $P_{0}$ | placeholder | MPa | |
+| Desired Thrust | $F$ | 5 | $kN$ | |
+| Chamber Pressure | $P_{0}$ | placeholder | $MPa$ | |
 | Altitude (optional) | $ALT$ | placeholder | unit | |
 | Oxidizer to fuel ratio | $O/F$ | placeholder | dimensional | | 
-| Combustion chamber temperature| $TO$ | placeholder | K |  |
-| Molecular mass of the gas | $M$ | placeholder | kg/mol |  |
+| Combustion chamber temperature| $TO$ | placeholder | $K$ |  |
+| Molecular mass of the gas | $M$ | placeholder | $kg/mol$ |  |
 | Ratio of specific hear capacities | $k$ | placeholder | dimensionless | | 
-| Characteristic chamber length | $L*$ | placeholder | m |  |
+| Characteristic chamber length | $L*$ | placeholder | $m$ |  |
 
 ## Formulas
 | Name | Equation | Reference |
@@ -50,21 +50,21 @@ To Be Completed
 ## Outputs
 | Name | Symbol | Value | Unit |
 | :----------- | :------------ | :--- | :--- |
-| Specific impulse at altitude | $Isp$ | | sec | 
-| Throat temperature | $T_{t}$ |  | K | 
-| Effective exhaust velocity | $v_{2}$ |  | m/sec | 
-| Mass flow rate | $\dot{m}$ |  | kg/sec | 
-| Mass flow rate of the oxidizer | $\dot{m}_{oxidizer}$ |  | kg/sec | 
-| Mass flow rate of the fuel | $\dot{m}_{fuel}$ |  | kg/sec | 
+| Specific impulse at altitude | $Isp$ | | $s$ | 
+| Throat temperature | $T_{t}$ |  | $K$ | 
+| Effective exhaust velocity | $v_{2}$ |  | $m/s$ | 
+| Mass flow rate | $\dot{m}$ |  | $kg/s$ | 
+| Mass flow rate of the oxidizer | $\dot{m}_{oxidizer}$ |  | $kg/s$ | 
+| Mass flow rate of the fuel | $\dot{m}_{fuel}$ |  | $kg/s$ | 
 | Pressure Ratio | $PR$ |  | dimensionless | 
 | Expansion ratio | $ER$ |  | dimensionless | 
-| Exit temperature | $T_{e}$ |  | K | 
-| Exit Mach number | $M_{num}$ |  | dimension | 
-| Area of the throat | $A_{t}$ |  | m^2 | 
-| Area of the exit | $A_{e}$ |  | m^2 | 
-| Radius of the throat | $R_{t}$ |  | m | 
-| Radius of the exit | $R_{e}$ |  | m | 
-| Radius of the chamber | $R_{c}$ |  | m | 
-| Length of the chamber | $L_{c}$ |  | m | 
-| Length of the diverging nozzle | $L_{dn}$ |  | m | 
-| Length of the converging nozzle | $L_{cn}$ |  | m | 
+| Exit temperature | $T_{e}$ |  | $K$ | 
+| Exit Mach number | $M_{num}$ |  | $m/s$ | 
+| Area of the throat | $A_{t}$ |  | $m^2$ | 
+| Area of the exit | $A_{e}$ |  | $m^2$ | 
+| Radius of the throat | $R_{t}$ |  | $m$ | 
+| Radius of the exit | $R_{e}$ |  | $m$ | 
+| Radius of the chamber | $R_{c}$ |  | $m$ | 
+| Length of the chamber | $L_{c}$ |  | $m$ | 
+| Length of the diverging nozzle | $L_{dn}$ |  | $m$ | 
+| Length of the converging nozzle | $L_{cn}$ |  | $m$ | 
