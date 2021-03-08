@@ -42,7 +42,7 @@ The third step in designing the Aphlex 1C engine is the injector portion, which 
 | Fuel manifold orifice distance | $d_{man_{f}} =\frac{\frac{d_{com_{f}}}{L_{POI_{f}}}}{L_{inj}+L_{POI_{f}}}$ |
 
 ## Program Structure and Functions
-To Be Completed
+Similar to nozzle.py, injector.py runs `injector_main(data: dict)` to receive inputs from the recurring `data` dictionary. THe method then attempts to calculate injector dimensions. The method stores the dimensions back into `data` to be returned. 
 
 ## Outputs
 | Name | Symbol | Value | Unit |

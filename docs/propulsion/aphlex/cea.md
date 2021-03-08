@@ -20,15 +20,15 @@ The first step in designing the Aphlex 1C engine is to calculate several chemica
 
 
 ## Program Structure and Function
-The main method calls `cea_inp(data: dict, case_name: str)` to create a .inp file for CEAgui to read. The inputed dictionary retrieves all inputs, and with this method, writes and formats the input for CEAgui. This method also creates a new directory to store all files throughout the process, and returns the directory name, case_dir. Next, the method calls `cea_driver(case_name, case_dir)` to do two tasks: 1. begin a thread, 2. call CEAgui as a subprocess. Prior to doing this, the .inp file is moved to the same directory as CEAgui to ensure the .exe can reach all helper functions such as thermo.lib.  CEAgui is called and asks for a file path to the .inp file. The thread calls the `type_with_delay(case_dir: str ,  delay: float)` to type in the file path to begin CEAgui. CEAgui outputs a .out file which is immediately with the .inp file moved to `case_dir` to be parsed. `cea_outparse(data: dict, case_name: str, case_dir: str)` is lastly called to iterate through the .out file's lines to find the desired outputs. The outputs are added to the dict and used to write a .csv file. The method returns the dict as an input for the following functions. 
+The main method calls `cea_inp(data: dict, case_name: str)` to create a .inp file for CEAgui to read. The inputed dictionary retrieves all inputs, and with this method, writes and formats the input for CEAgui. This method also creates a new directory to store all files throughout the process, and returns the directory name, `case_dir`. Next, the method calls `cea_driver(case_name, case_dir)` to do two tasks: 1. begin a thread, 2. call CEAgui as a subprocess. Prior to doing this, the .inp file is moved to the same directory as CEAgui to ensure the .exe can reach all helper functions such as thermo.lib.  CEAgui is called and asks for a file path to the .inp file. The thread calls the `type_with_delay(case_dir: str ,  delay: float)` to type in the file path to begin CEAgui. CEAgui outputs a .out file which is immediately with the .inp file moved to `case_dir` to be parsed. `cea_outparse(data: dict, case_name: str, case_dir: str)` is lastly called to iterate through the .out file's lines to find the desired outputs. The outputs are added to the dict and used to write a .csv file. The method returns the dict as an input for the following functions. 
 
 
 ## Outputs
 | Name | Symbol | Descriptions | Value | Unit |
 | :----------- | :------------ | :------------------------------------------------------------------------------------ | :--- | :--- 
-| Throat Pressure | $P_1$ | | | Bar |
-| Specific Impulse | $I_{sp}$ | Impulse per unit weight | | $m/sec$ |
-| Characteristic Velocity | $c*$ | Ideal velocity of the system | | $m/sec$ |
+| Throat Pressure | $P_1$ | | | $Pa$ |
+| Specific Impulse | $I_{sp}$ | Impulse per unit weight | | $m/s$ |
+| Characteristic Velocity | $c^*$ | Ideal velocity of the system | | $m/s$ |
 | Ratio of Specific Heats | $\gamma$ | Determines thermodynamic properties in isentropic flow | | No Units |
-| Molecular Mass | $M$ | | | $g/mol$ |
+| Molecular Mass | $M$ | | | $kg/mol$ |
 

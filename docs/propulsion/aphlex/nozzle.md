@@ -4,7 +4,7 @@ sidebar_label: Nozzle
 ---
 
 ## Overview
-The second step in designing the Aphlex 1C engine is the nozzle portion, which takes in key input parameters and combustion properties produced by the CEAgui portion of the program. The outputs are key dimensions and properties of the rocket nozzle, which can then be used to design and manufacture optimal geometries. Mass flow rate is also calculated, which is essential for fluid flow and injector calculations.
+The second step in designing the Aphlex 1C engine involves determining nozzle dimensions. nozzle.py attempts to calculate these paramaters by using properties of combustion ascertained by CEAgui. Information on the dimensions of the "significant" portions of the nozzle such as the throat, allows us to design an optimized geometry of a rocket nozzle. This alows for further analysis using CFD to determine other properties of Callisto 1.  
 
 ## Inputs
 | Name | Symbol | Value | Unit | Origin |
@@ -12,7 +12,7 @@ The second step in designing the Aphlex 1C engine is the nozzle portion, which t
 | Desired Thrust | $F$ | 5 | $kN$ | |
 | Chamber Pressure | $P_{0}$ | placeholder | $MPa$ | |
 | Altitude (optional) | $ALT$ | placeholder | unit | |
-| Oxidizer to fuel ratio | $O/F$ | placeholder | dimensional | | 
+| Oxidizer to fuel ratio | $O/F$ | placeholder | dimensionless | | 
 | Combustion chamber temperature| $TO$ | placeholder | $K$ |  |
 | Molecular mass of the gas | $M$ | placeholder | $kg/mol$ |  |
 | Ratio of specific hear capacities | $k$ | placeholder | dimensionless | | 
@@ -45,7 +45,7 @@ The second step in designing the Aphlex 1C engine is the nozzle portion, which t
 | $L_{cn}$ | $\frac{R_{c} - R_{t}}{tan(45)}$
 
 ## Program Structure and Functions
-To Be Completed
+`nozzle_main(data: dict)` inputs `data`, a recurring dictionary which is passed through each program. Using the formulas from (insert here) calculate the nozzle dimensions and store them back into `data` to be returned. 
 
 ## Outputs
 | Name | Symbol | Value | Unit |
