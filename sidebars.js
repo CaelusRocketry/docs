@@ -21,7 +21,18 @@ module.exports = {
         ),
       },
     ],
-    Electronics: ["launchbox"].map((page) => `electronics/${page}`),
+    Electronics: [
+      {
+        "PCBs": [
+          "launchbox",
+          "teststandpcb",
+        ].map((page) => `electronics/PCBs/${page}`),
+      },
+      {
+        "Sensors": [
+        ].map((page) => `electronics/Senosrs/${page}`),
+      },
+    ],
     Programming: [
       {
         "Flight Software": [
