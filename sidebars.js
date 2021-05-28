@@ -30,7 +30,9 @@ module.exports = {
       },
       {
         "Sensors": [
-        ].map((page) => `electronics/Senosrs/${page}`),
+          "pts",
+          "loadcells",
+        ].map((page) => `electronics/Sensors/${page}`),
       },
     ],
     Programming: [
